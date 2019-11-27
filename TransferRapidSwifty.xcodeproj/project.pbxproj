@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,9 +13,15 @@
 		4E448EF5238DD97C00B3A34C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E448EF3238DD97C00B3A34C /* Main.storyboard */; };
 		4E448EF7238DD98300B3A34C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E448EF6238DD98300B3A34C /* Assets.xcassets */; };
 		4E448EFA238DD98300B3A34C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E448EF8238DD98300B3A34C /* LaunchScreen.storyboard */; };
+		4E448F02238DEAF700B3A34C /* Logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4E448F01238DEAF700B3A34C /* Logo.jpg */; };
+		4E448F04238DF00C00B3A34C /* small_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E448F03238DF00B00B3A34C /* small_logo.png */; };
+		E97ABF488FBB7488876C3192 /* Pods_TransferRapidSwifty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ADBD2BE86B892D396F9C086 /* Pods_TransferRapidSwifty.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C7F1BA8B0DA5213EAEF334D /* Pods-TransferRapidSwifty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TransferRapidSwifty.release.xcconfig"; path = "Target Support Files/Pods-TransferRapidSwifty/Pods-TransferRapidSwifty.release.xcconfig"; sourceTree = "<group>"; };
+		2ADBD2BE86B892D396F9C086 /* Pods_TransferRapidSwifty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TransferRapidSwifty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C5F75BC8688CB431EA463B0 /* Pods-TransferRapidSwifty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TransferRapidSwifty.debug.xcconfig"; path = "Target Support Files/Pods-TransferRapidSwifty/Pods-TransferRapidSwifty.debug.xcconfig"; sourceTree = "<group>"; };
 		4E448EEA238DD97C00B3A34C /* TransferRapidSwifty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransferRapidSwifty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E448EED238DD97C00B3A34C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E448EEF238DD97C00B3A34C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +30,8 @@
 		4E448EF6238DD98300B3A34C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E448EF9238DD98300B3A34C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4E448EFB238DD98300B3A34C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E448F01238DEAF700B3A34C /* Logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Logo.jpg; sourceTree = "<group>"; };
+		4E448F03238DF00B00B3A34C /* small_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_logo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E97ABF488FBB7488876C3192 /* Pods_TransferRapidSwifty.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +51,8 @@
 			children = (
 				4E448EEC238DD97C00B3A34C /* TransferRapidSwifty */,
 				4E448EEB238DD97C00B3A34C /* Products */,
+				B0BB65AB58F8E339FFFC3480 /* Pods */,
+				B4A9B6FDC3FA2B475BE862FF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,9 +73,28 @@
 				4E448EF3238DD97C00B3A34C /* Main.storyboard */,
 				4E448EF6238DD98300B3A34C /* Assets.xcassets */,
 				4E448EF8238DD98300B3A34C /* LaunchScreen.storyboard */,
+				4E448F01238DEAF700B3A34C /* Logo.jpg */,
+				4E448F03238DF00B00B3A34C /* small_logo.png */,
 				4E448EFB238DD98300B3A34C /* Info.plist */,
 			);
 			path = TransferRapidSwifty;
+			sourceTree = "<group>";
+		};
+		B0BB65AB58F8E339FFFC3480 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4C5F75BC8688CB431EA463B0 /* Pods-TransferRapidSwifty.debug.xcconfig */,
+				0C7F1BA8B0DA5213EAEF334D /* Pods-TransferRapidSwifty.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B4A9B6FDC3FA2B475BE862FF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2ADBD2BE86B892D396F9C086 /* Pods_TransferRapidSwifty.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +104,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4E448EFE238DD98300B3A34C /* Build configuration list for PBXNativeTarget "TransferRapidSwifty" */;
 			buildPhases = (
+				9203783963B5BD9C504F5E3D /* [CP] Check Pods Manifest.lock */,
 				4E448EE6238DD97C00B3A34C /* Sources */,
 				4E448EE7238DD97C00B3A34C /* Frameworks */,
 				4E448EE8238DD97C00B3A34C /* Resources */,
+				893BFCDDB67C9B05600E445F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,13 +157,57 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E448F02238DEAF700B3A34C /* Logo.jpg in Resources */,
 				4E448EFA238DD98300B3A34C /* LaunchScreen.storyboard in Resources */,
 				4E448EF7238DD98300B3A34C /* Assets.xcassets in Resources */,
+				4E448F04238DF00C00B3A34C /* small_logo.png in Resources */,
 				4E448EF5238DD97C00B3A34C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		893BFCDDB67C9B05600E445F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TransferRapidSwifty/Pods-TransferRapidSwifty-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TransferRapidSwifty/Pods-TransferRapidSwifty-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TransferRapidSwifty/Pods-TransferRapidSwifty-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9203783963B5BD9C504F5E3D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TransferRapidSwifty-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4E448EE6238DD97C00B3A34C /* Sources */ = {
@@ -282,6 +358,7 @@
 		};
 		4E448EFF238DD98300B3A34C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C5F75BC8688CB431EA463B0 /* Pods-TransferRapidSwifty.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,6 +377,7 @@
 		};
 		4E448F00238DD98300B3A34C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C7F1BA8B0DA5213EAEF334D /* Pods-TransferRapidSwifty.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
