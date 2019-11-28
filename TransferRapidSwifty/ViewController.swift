@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     var sum : Int = 0
     var commission : Int = 2
     
+    let urlString = "http://data.fixer.io/api/latest?access_key=78393061a42b3ac215ec6f2cada75d3a"
     
     var moneySelected : Int = 0
     var moneyTypes = ["€","$","RON"]
@@ -26,9 +27,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var sumSlider: UISlider!
     @IBOutlet weak var sumText: UITextField!
-    @IBOutlet weak var commisionValue: UILabel!
+    @IBOutlet weak var feeValue: UILabel!
     @IBOutlet weak var transferButton: UIButton!
-    @IBOutlet weak var commisionPercent: UILabel!
+    @IBOutlet weak var feePercent: UILabel!
     
     
     
@@ -45,8 +46,28 @@ class ViewController: UIViewController {
 
         transferButton.layer.cornerRadius = 25
         transferButton.isHidden = true
-        commisionValue.text = "0"
-        // Do any additional setup after loading the view.
+        feeValue.text = "0"
+        
+        getLatest { [weak self] (result) in
+        
+        DispatchQueue.main.async {
+            switch result {
+                            
+                    case .success(let response):
+                            
+                            
+                        let dollar = response.rates["USD"]!
+                        self?.moneyValue[1] = dollar
+                        let romanianLeu = response.rates["RON"]!
+                        self?.moneyValue[2] = romanianLeu
+                        print(romanianLeu)
+//
+                    case .failure: print("error")
+                    }
+            }
+        }
+  
+        
     }
 
 
@@ -54,8 +75,8 @@ class ViewController: UIViewController {
     @IBAction func changeSum(_ sender: Any) {
         
         sumSlider.value = round(sumSlider.value)
-        calculateCommission()
-        commisionPercent.text = "\(commission)%"
+        calculateFee()
+        feePercent.text = "\(commission)%"
         if( round(sumSlider.value) != 0 ){
             transferButton.isHidden = false
         }else{
@@ -65,10 +86,10 @@ class ViewController: UIViewController {
         switch moneySelected {
         case 0:
             sumText.text! = "\(Int(sumSlider.value))€"
-            commisionValue.text = "\(Int(commission*Int(sumSlider.value)/100))€"
+            feeValue.text = "\(Int(commission*Int(sumSlider.value)/100))€"
             
             if(Int(commission*Int(sumSlider.value)/100)==0){
-                commisionValue.text  = "1€"
+                feeValue.text  = "1€"
             }
 //        case 1:
 //            sumText.text! = "\(Int(sumSlider.value*1.1))$"
@@ -78,7 +99,7 @@ class ViewController: UIViewController {
 //            commisionValue.text = "\(Int(commission*Int(sumSlider.value)*1.1/100))RON"
         default:
             sumText.text! = "\(Int(sumSlider.value))€"
-            commisionValue.text = "\(Int(commission*Int(sumSlider.value))/100)€"
+            feeValue.text = "\(Int(commission*Int(sumSlider.value))/100)€"
         }
         
     
@@ -86,7 +107,7 @@ class ViewController: UIViewController {
     }
     
     
-    @objc func calculateCommission(){
+    @objc func calculateFee(){
         
         switch (round(sumSlider.value)) {
             
@@ -145,5 +166,37 @@ class ViewController: UIViewController {
     
     
     
+       func getLatest(completion: @escaping (Result) -> Void) {
+       
+        guard let url = URL(string: urlString) else { completion(.failure); return  }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+             
+             guard error == nil, let urlResponse = response as? HTTPURLResponse, urlResponse.statusCode == 200, let data = data else { completion(.failure); return }
+             
+             do {
+                 
+                 let exchangeRates = try JSONDecoder().decode(rates.self, from: data)
+                 completion(.success(exchangeRates))
+             }
+             catch { completion(.failure) }
+             
+             }.resume()
+    }
 }
 
+
+
+
+struct rates: Decodable {
+    
+    var date: String
+    var base: String
+    var rates: [String: Double]
+}
+
+enum Result {
+    
+    case failure
+    case success(rates)
+}
