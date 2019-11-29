@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import AudioToolbox
 
-class ViewController: UIViewController {
-
+class TransferVC: UIViewController {
+ ///TODO: 1001 sum?
 //
 //    - între 1-100 Euro: comision 2%
 //    - între 101-500 Euro: comision 3%
@@ -50,7 +51,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var phoneInfo: UILabel!
     @IBOutlet weak var phoneNumber: UILabel!
-    @IBOutlet weak var transferLabel: UIButton!
+   
     
     
     @IBOutlet weak var firstInterval: UIButton!
@@ -67,7 +68,7 @@ class ViewController: UIViewController {
 
         transferButton.layer.cornerRadius = 25
         transferButton.isHidden = true
-        transferLabel.isEnabled = false
+        
         firstInterval.isEnabled = false
         
         var timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(processTimer), userInfo: nil, repeats: true)
@@ -197,6 +198,7 @@ class ViewController: UIViewController {
             secondInterval.isEnabled = true
             thirdInterval.isEnabled = true
         }
+        transferButton.isHidden = false
     }
     
     @IBAction func changeMoneySelected(_ sender: Any) {
@@ -237,6 +239,7 @@ class ViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             }else{
                 let alert = UIAlertController(title: "Eroare", message: "Transferul sumei a esuat", preferredStyle: UIAlertController.Style.alert)
+                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
                 alert.addAction(UIAlertAction(title: "Ok🥺", style: UIAlertAction.Style.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
@@ -338,7 +341,9 @@ class ViewController: UIViewController {
         
         let sumInt: Int = Int(sumText.text!) ?? 0
         switch (sumInt) {
-        case 0...100:
+        case 0:
+            transferButton.isHidden = true
+        case 1...100:
             sumSliderModifier(withCase: 0)
         case 101...500:
             sumSliderModifier(withCase: 1)
@@ -346,6 +351,7 @@ class ViewController: UIViewController {
             sumSliderModifier(withCase: 2)
         case _ where sumInt>1000:
             print("WTF")
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
             sumSliderModifier(withCase: 2)
             sumText.text! = "1000"
             ///TODO: bAlerta
@@ -357,27 +363,23 @@ class ViewController: UIViewController {
         default:
             sumSliderModifier(withCase: 0)
         }
-        sumSlider.value =  Float(sumText.text!) as! Float
+        sumSlider.value =  Float(sumText.text!) as! Float  ?? 1.0
         sumText.text! = "\(sumText.text!)\(moneyTypes[moneySelected])"
         calculateFee()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         if segue.identifier == "showHistory"{
-            var vc = segue.destination as! TransferHistoryController
-               
-           }
-    }
-    
-    @IBAction func showHistory(_ sender: Any) {
-        let intSum = Int(sumSlider.value)
-        if(intSum != 0){
-            performSegue(withIdentifier: "showHistory", sender: self)
-        }else{
-            return
-        }
         
     }
+    
+   
+    
+//    @IBAction func showHistory(_ sender: Any) {
+//        let intSum = Int(sumSlider.value)
+//        if(intSum != 0){
+//            performSegue(withIdentifier: "showHistory", sender: self)
+//        }else{
+//            return
+//        }
+//
+//    }
     
     
     

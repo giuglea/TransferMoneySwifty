@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>558685701623-bma0vocla2ad1slpl7jsal156gcqjguh.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.558685701623-bma0vocla2ad1slpl7jsal156gcqjguh</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBynOT-llyrOTlS0VvOT4wDbarmdQg5eWM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>558685701623</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.Giuglea.TransferRapidSwifty</string>
+	<key>PROJECT_ID</key>
+	<string>transferrapidswifty</string>
+	<key>STORAGE_BUCKET</key>
+	<string>transferrapidswifty.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:558685701623:ios:ff3b2825edf08d9023daf2</string>
+	<key>DATABASE_URL</key>
+	<string>https://transferrapidswifty.firebaseio.com</string>
+</dict>
+</plist>

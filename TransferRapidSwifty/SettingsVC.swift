@@ -1,5 +1,5 @@
 //
-//  RegisterVC.swift
+//  SettingsVC.swift
 //  TransferRapidSwifty
 //
 //  Created by Andrei Giuglea on 29/11/2019.
@@ -10,8 +10,10 @@ import Foundation
 import UIKit
 
 
-class RegisterVC: UIViewController {
+class SettingsVC: UIViewController{
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
 }

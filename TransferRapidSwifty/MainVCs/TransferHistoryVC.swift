@@ -12,15 +12,13 @@ import RealmSwift
 
 
 
-class TransferHistoryController: UIViewController,UITableViewDelegate,UITableViewDataSource{
+class TransferHistoryVC: UIViewController,UITableViewDelegate,UITableViewDataSource{
     
     
     var transferArray = [TransferObject]()
     var transferObject  = [TransferObject]()
    
     @IBOutlet weak var tableViewN: UITableView!
-    
-    
     
     
     
@@ -36,9 +34,7 @@ class TransferHistoryController: UIViewController,UITableViewDelegate,UITableVie
     }
     
   
-    
-    
-    
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return transferArray.count
