@@ -16,6 +16,7 @@ class TransferHistoryController: UIViewController,UITableViewDelegate,UITableVie
     
     
     var transferArray = [TransferObject]()
+    var transferObject  = [TransferObject]()
    
     @IBOutlet weak var tableViewN: UITableView!
     
@@ -27,27 +28,14 @@ class TransferHistoryController: UIViewController,UITableViewDelegate,UITableVie
         super.viewDidLoad()
         
        
-        var first = UserDefaults.standard.bool(forKey: "first")
-        
-        if(first == false) {
-            var dataBase = DataBase(defaulty: 0) //Transfer (Id, Sender,Data,Value,Receiver)
-            first = true
-            UserDefaults.standard.set(first, forKey: "first")
-        }
-        
-        var dataBase = DataBase(defaulty: 1)
-        
-        dataBase.createTable(createTableString: "CREATE TABLE Transfer(Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Sender CHAR(255), Data CHAR(255), Value INT, Receiver  CHAR(255) );")
-        
-        let transfer = TransferObject(sender: "Cineva", receiver: "Altcineva", date: "data", value: 109)
-        let insertStatementString = "INSERT INTO Transfer (Id, Sender, Data, Value, Receiver) VALUES (?, ?, ?, ?, ?);"
-        dataBase.insert(sender: transfer.sender, receiver: transfer.receiver, value: transfer.value, insertStatementString: insertStatementString)
-        
-        
+       var dataBase = checkCreateDatabase()
+
         transferArray = dataBase.query(queryStatementString: "SELECT * FROM Transfer;")
         tableViewN.reloadData()
         
     }
+    
+  
     
     
     
@@ -84,5 +72,29 @@ class TransferHistoryController: UIViewController,UITableViewDelegate,UITableVie
     
     
     
+    @IBAction func goToSite(_ sender: Any) {
+        
+        if let url = URL(string: "https://www.transferrapid.com/index.html") {
+                  UIApplication.shared.open(url)
+              }
+        
+    }
+    
+    
 }
+
+
+func checkCreateDatabase()->DataBase{
+    var first = UserDefaults.standard.bool(forKey: "first")
+             
+    if(first == false) {
+        var dataBase = DataBase(defaulty: 0) //Transfer (Id, Sender,Data,Value,Receiver)
+        first = true
+        UserDefaults.standard.set(first, forKey: "first")
+    }
+             
+    var dataBase = DataBase(defaulty: 1)
+      
+      return dataBase
+  }
 

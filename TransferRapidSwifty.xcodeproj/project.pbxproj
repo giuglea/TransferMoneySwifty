@@ -21,6 +21,8 @@
 		4ECC130F238FE56F00744A7D /* no22.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECC130D238FE56E00744A7D /* no22.png */; };
 		4ECC1311238FE78E00744A7D /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECC1310238FE78E00744A7D /* Database.swift */; };
 		4EF43F01238FED400082884D /* TransferObjectClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF43F00238FED400082884D /* TransferObjectClass.swift */; };
+		4EF43F06239173630082884D /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF43F05239173630082884D /* LogInVC.swift */; };
+		4EF43F08239173A30082884D /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF43F07239173A30082884D /* RegisterVC.swift */; };
 		E97ABF488FBB7488876C3192 /* Pods_TransferRapidSwifty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ADBD2BE86B892D396F9C086 /* Pods_TransferRapidSwifty.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +46,8 @@
 		4ECC130D238FE56E00744A7D /* no22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no22.png; sourceTree = "<group>"; };
 		4ECC1310238FE78E00744A7D /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		4EF43F00238FED400082884D /* TransferObjectClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferObjectClass.swift; sourceTree = "<group>"; };
+		4EF43F05239173630082884D /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
+		4EF43F07239173A30082884D /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 				4E448EED238DD97C00B3A34C /* AppDelegate.swift */,
 				4E448EEF238DD97C00B3A34C /* SceneDelegate.swift */,
 				4E448EF1238DD97C00B3A34C /* ViewController.swift */,
+				4EF43F05239173630082884D /* LogInVC.swift */,
+				4EF43F07239173A30082884D /* RegisterVC.swift */,
 				4E3A8652238EF518001C979E /* TransferHistory.swift */,
 				4E448EF3238DD97C00B3A34C /* Main.storyboard */,
 				4ECC1310238FE78E00744A7D /* Database.swift */,
@@ -89,13 +95,21 @@
 				4E3A8656238EF851001C979E /* CustomTransferCell.swift */,
 				4E448EF6238DD98300B3A34C /* Assets.xcassets */,
 				4E448EF8238DD98300B3A34C /* LaunchScreen.storyboard */,
-				4E448F01238DEAF700B3A34C /* Logo.jpg */,
-				4ECC130C238FE56E00744A7D /* no11.png */,
-				4ECC130D238FE56E00744A7D /* no22.png */,
-				4E448F03238DF00B00B3A34C /* small_logo.png */,
+				4EF43F04239172F40082884D /* Images */,
 				4E448EFB238DD98300B3A34C /* Info.plist */,
 			);
 			path = TransferRapidSwifty;
+			sourceTree = "<group>";
+		};
+		4EF43F04239172F40082884D /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				4ECC130C238FE56E00744A7D /* no11.png */,
+				4ECC130D238FE56E00744A7D /* no22.png */,
+				4E448F03238DF00B00B3A34C /* small_logo.png */,
+				4E448F01238DEAF700B3A34C /* Logo.jpg */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		B0BB65AB58F8E339FFFC3480 /* Pods */ = {
@@ -236,9 +250,11 @@
 			files = (
 				4ECC1311238FE78E00744A7D /* Database.swift in Sources */,
 				4E448EF2238DD97C00B3A34C /* ViewController.swift in Sources */,
+				4EF43F06239173630082884D /* LogInVC.swift in Sources */,
 				4E448EEE238DD97C00B3A34C /* AppDelegate.swift in Sources */,
 				4E448EF0238DD97C00B3A34C /* SceneDelegate.swift in Sources */,
 				4EF43F01238FED400082884D /* TransferObjectClass.swift in Sources */,
+				4EF43F08239173A30082884D /* RegisterVC.swift in Sources */,
 				4E3A8653238EF518001C979E /* TransferHistory.swift in Sources */,
 				4E3A8657238EF851001C979E /* CustomTransferCell.swift in Sources */,
 			);
