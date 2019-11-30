@@ -17,6 +17,8 @@ class TransferHistoryVC: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     var transferArray = [TransferObject]()
     var transferObject  = [TransferObject]()
+    
+    var refreshControl = UIRefreshControl()
    
     @IBOutlet weak var tableViewN: UITableView!
     
@@ -24,6 +26,11 @@ class TransferHistoryVC: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     override func viewDidLoad() {
         super.viewDidLoad()
+  
+//        refreshControl.addTarget(self, action: "refresh:", for: UIControl.Event.valueChanged)
+//        self.refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+//
+//       tableViewN.addSubview(refreshControl)
         
        
        var dataBase = checkCreateDatabase()
@@ -68,13 +75,24 @@ class TransferHistoryVC: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     
     
-    @IBAction func goToSite(_ sender: Any) {
-        
-        if let url = URL(string: "https://www.transferrapid.com/index.html") {
-                  UIApplication.shared.open(url)
-              }
+    @IBAction func updateTable(_ sender: Any) {
+        var dataBase = checkCreateDatabase()
+
+        transferArray = dataBase.query(queryStatementString: "SELECT * FROM Transfer;")
+        tableViewN.reloadData()
         
     }
+    
+    @objc func refresh(sender:AnyObject)
+     {
+         // Updating your data here...
+        var dataBase = checkCreateDatabase()
+
+        transferArray = dataBase.query(queryStatementString: "SELECT * FROM Transfer;")
+
+         self.tableViewN.reloadData()
+         self.refreshControl.endRefreshing()
+     }
     
     
 }

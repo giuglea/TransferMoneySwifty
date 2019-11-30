@@ -37,12 +37,29 @@ class RegisterVC: UIViewController {
             Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
                 if (error  != nil ){
                     print(error!)
+//                    let ierror = Database.database().reference().child("Users")
+//                    if (ierror){}
+                        
+                    
                 }else{
                     print("User created succesful!")
+                    let alert = UIAlertController(title: "Succes!", message: "Contul a fost creat.\nVa rugam sa va logati.", preferredStyle: UIAlertController.Style.alert)
+                    //alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler:nil))
+                    let alertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (UIAlertAction) in
+                        self.dismissVC()
+                    }
+                    alert.addAction(alertAction)
+                    self.present(alert, animated: true,completion: nil)
+                   
                 }
             }
         }
         
+    }
+    
+    @objc func dismissVC()->Void{
+         presentingViewController?.dismiss(animated: true, completion: nil)
+        return
     }
     
 }
