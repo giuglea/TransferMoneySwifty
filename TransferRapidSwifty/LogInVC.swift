@@ -23,7 +23,9 @@ class LogInVC: UIViewController{
         super.viewDidLoad()
         logInButton.layer.cornerRadius = 25
         hasLoggedIn = UserDefaults.standard.bool(forKey: "LoggedIn")
+        
         if(hasLoggedIn){
+            print(hasLoggedIn)
             performSegue(withIdentifier: "goTransfer", sender: self)
             
         }
@@ -45,6 +47,8 @@ class LogInVC: UIViewController{
                       print("Log in succesful")
                       print(user)
                     self.hasLoggedIn = true
+                    print("aci")
+                    print(self.hasLoggedIn)
                     UserDefaults.standard.set(self.hasLoggedIn, forKey: "LoggedIn")
                     self.performSegue(withIdentifier: "goTransfer", sender: self)
 
