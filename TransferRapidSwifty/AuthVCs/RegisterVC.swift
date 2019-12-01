@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Firebase
+import AudioToolbox
 
 
 class RegisterVC: UIViewController {
@@ -37,6 +38,7 @@ class RegisterVC: UIViewController {
             Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
                 if (error  != nil ){
                     print(error!)
+                    AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
 //                    let ierror = Database.database().reference().child("Users")
 //                    if (ierror){}
                         

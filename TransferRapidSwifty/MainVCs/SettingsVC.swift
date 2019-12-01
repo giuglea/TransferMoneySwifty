@@ -24,7 +24,7 @@ class SettingsVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentUserLabel.text! = (Auth.auth().currentUser?.email)!
+        do {try currentUserLabel.text! = (Auth.auth().currentUser?.email)!}catch{print(error)}
         logOutButton.layer.cornerRadius = 25
         moneyValueLabel.text! = "\(moneyValue[moneySelected])\(moneyTypes[moneySelected])"
         
@@ -82,13 +82,16 @@ class SettingsVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource{
     }
     
     @IBAction func logOut(_ sender: Any) {
-       
+       UserDefaults.standard.set(false, forKey: "LogIn")
+        print("Aci 111\n")
+        print(UserDefaults.standard.bool(forKey: "LogIn"))
         do{
             
             try Auth.auth().signOut()
-            UserDefaults.standard.set(false, forKey: "LoggedIn")
+            
             let dataBase = DataBase(defaulty: 1)
             dataBase.dropTable(tableName: "Transfer")
+            dataBase.dropTable(tableName: "LogIn")
                 presentingViewController?.dismiss(animated: true, completion: nil)
               }catch{
                   print(error)

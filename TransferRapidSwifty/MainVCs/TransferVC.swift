@@ -167,6 +167,7 @@ class TransferVC: UIViewController {
             secondInterval.isEnabled = true
             thirdInterval.isEnabled = true
             
+            
         case 1:
             sumSlider.minimumValue = 100
             sumSlider.maximumValue = 500
@@ -199,6 +200,8 @@ class TransferVC: UIViewController {
             thirdInterval.isEnabled = true
         }
         transferButton.isHidden = false
+        sumText.text! = "\(Int(sumSlider.value))€"
+        calculateFee()
     }
     
     @IBAction func changeMoneySelected(_ sender: Any) {
@@ -344,7 +347,8 @@ class TransferVC: UIViewController {
         default:
             sumSliderModifier(withCase: 0)
         }
-        sumSlider.value =  Float(sumText.text!) as! Float  ?? 1.0
+        guard let sumTextFloat = Float(sumText.text!) else{return}
+        sumSlider.value =   sumTextFloat   ///Doar asta
         sumText.text! = "\(sumText.text!)\(moneyTypes[moneySelected])"
         calculateFee()
         

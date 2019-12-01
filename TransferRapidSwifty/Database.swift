@@ -65,11 +65,11 @@ func createTable(createTableString: String ){
     
     if sqlite3_prepare_v2(db, createTableString, -1, &createTableStatement, nil)==SQLITE_OK{
         if sqlite3_step(createTableStatement)==SQLITE_DONE{
-            print("Contact Table created")
+            print("Table created")
             
         }
         else {
-            print("Contact Table could not be created")
+            print("Table could not be created")
         }
     }
     else{
@@ -77,6 +77,28 @@ func createTable(createTableString: String ){
     }
     sqlite3_finalize(createTableStatement)
 }
+    
+    func insert(logIn: Int,insertStatementString: String){
+        var insertStatement:OpaquePointer?=nil
+         if sqlite3_prepare_v2(db, insertStatementString, -1, &insertStatement, nil)==SQLITE_OK{
+            
+            sqlite3_bind_int(insertStatement, 1, Int32(1))
+            sqlite3_bind_int(insertStatement, 2, Int32(logIn))
+            if sqlite3_step(insertStatement) == SQLITE_DONE {
+             print("Successfully inserted row.")
+             UserDefaults.standard.set(id, forKey: "id")//MARK: Atentie
+            sqlite3_finalize(insertStatement)
+            }else{
+                print("Could not insert row.")
+                sqlite3_finalize(insertStatement)
+            }
+         }else{
+            print("INSERT statement could not be prepared.")
+            sqlite3_finalize(insertStatement)
+        }
+        
+        
+    }
    
     
     
@@ -159,6 +181,34 @@ func createTable(createTableString: String ){
         
        
     }
+    
+    func query1(queryStatementString:String)->Int {
+        var queryStatement: OpaquePointer? = nil
+        
+        if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
+            
+            if sqlite3_step(queryStatement) == SQLITE_ROW {
+               
+                let id = sqlite3_column_int(queryStatement, 0)
+                let logIn = sqlite3_column_int(queryStatement, 1)
+               sqlite3_finalize(queryStatement)
+                return Int(logIn)
+                
+            } else {
+                print("Query returned no results")
+            }
+        } else {
+            print("SELECT statement could not be prepared")
+        }
+        
+        // 6
+        sqlite3_finalize(queryStatement)
+        return 0
+    }
+    
+    
+    
+    
     func dropTable(tableName:String){
         let destroyStatementString = "DROP TABLE \(tableName)"
         var destroyTableStatement: OpaquePointer? = nil

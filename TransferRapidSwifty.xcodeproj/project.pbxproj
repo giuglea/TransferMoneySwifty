@@ -24,8 +24,8 @@
 		4EF43F01238FED400082884D /* TransferObjectClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF43F00238FED400082884D /* TransferObjectClass.swift */; };
 		4EF43F06239173630082884D /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF43F05239173630082884D /* LogInVC.swift */; };
 		4EF43F08239173A30082884D /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF43F07239173A30082884D /* RegisterVC.swift */; };
-		4EF43F0A239178D40082884D /* FirstVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF43F09239178D40082884D /* FirstVC.swift */; };
 		4EF43F0E23917B570082884D /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF43F0D23917B570082884D /* SettingsVC.swift */; };
+		4EF543F323932805003326AD /* HelpfulFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF543F223932805003326AD /* HelpfulFunc.swift */; };
 		E97ABF488FBB7488876C3192 /* Pods_TransferRapidSwifty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ADBD2BE86B892D396F9C086 /* Pods_TransferRapidSwifty.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,8 +52,8 @@
 		4EF43F00238FED400082884D /* TransferObjectClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferObjectClass.swift; sourceTree = "<group>"; };
 		4EF43F05239173630082884D /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		4EF43F07239173A30082884D /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
-		4EF43F09239178D40082884D /* FirstVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstVC.swift; sourceTree = "<group>"; };
 		4EF43F0D23917B570082884D /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		4EF543F223932805003326AD /* HelpfulFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpfulFunc.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,13 +92,12 @@
 				4E448EED238DD97C00B3A34C /* AppDelegate.swift */,
 				4E448EEF238DD97C00B3A34C /* SceneDelegate.swift */,
 				4E448EF3238DD97C00B3A34C /* Main.storyboard */,
-				4EF43F05239173630082884D /* LogInVC.swift */,
 				4E448EF8238DD98300B3A34C /* LaunchScreen.storyboard */,
 				4EF43F0B239179A10082884D /* AuthVCs */,
 				4EF43F0C239179CC0082884D /* MainVCs */,
 				4ECC1310238FE78E00744A7D /* Database.swift */,
-				4EF43F0D23917B570082884D /* SettingsVC.swift */,
 				4EF43F00238FED400082884D /* TransferObjectClass.swift */,
+				4EF543F223932805003326AD /* HelpfulFunc.swift */,
 				4E3A8656238EF851001C979E /* CustomTransferCell.swift */,
 				4E448EF6238DD98300B3A34C /* Assets.xcassets */,
 				4EF43F04239172F40082884D /* Images */,
@@ -113,8 +112,8 @@
 			children = (
 				4ECC130C238FE56E00744A7D /* no11.png */,
 				4ECC130D238FE56E00744A7D /* no22.png */,
-				4E448F03238DF00B00B3A34C /* small_logo.png */,
 				4E448F01238DEAF700B3A34C /* Logo.jpg */,
+				4E448F03238DF00B00B3A34C /* small_logo.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -122,7 +121,7 @@
 		4EF43F0B239179A10082884D /* AuthVCs */ = {
 			isa = PBXGroup;
 			children = (
-				4EF43F09239178D40082884D /* FirstVC.swift */,
+				4EF43F05239173630082884D /* LogInVC.swift */,
 				4EF43F07239173A30082884D /* RegisterVC.swift */,
 			);
 			path = AuthVCs;
@@ -133,6 +132,7 @@
 			children = (
 				4E448EF1238DD97C00B3A34C /* TransferVC.swift */,
 				4E3A8652238EF518001C979E /* TransferHistoryVC.swift */,
+				4EF43F0D23917B570082884D /* SettingsVC.swift */,
 			);
 			path = MainVCs;
 			sourceTree = "<group>";
@@ -277,8 +277,8 @@
 				4EF43F0E23917B570082884D /* SettingsVC.swift in Sources */,
 				4ECC1311238FE78E00744A7D /* Database.swift in Sources */,
 				4E448EF2238DD97C00B3A34C /* TransferVC.swift in Sources */,
+				4EF543F323932805003326AD /* HelpfulFunc.swift in Sources */,
 				4EF43F06239173630082884D /* LogInVC.swift in Sources */,
-				4EF43F0A239178D40082884D /* FirstVC.swift in Sources */,
 				4E448EEE238DD97C00B3A34C /* AppDelegate.swift in Sources */,
 				4E448EF0238DD97C00B3A34C /* SceneDelegate.swift in Sources */,
 				4EF43F01238FED400082884D /* TransferObjectClass.swift in Sources */,
