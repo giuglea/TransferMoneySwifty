@@ -63,18 +63,18 @@ class TransferVC: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        sumSlider.minimumValue = 1
+        sumSlider.minimumValue = 2
         sumSlider.maximumValue = 100
 
         transferButton.layer.cornerRadius = 25
-        transferButton.isHidden = true
+        //transferButton.isHidden = true
         
         firstInterval.isEnabled = false
         
         var timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(processTimer), userInfo: nil, repeats: true)
         timer.fire()
         
-        feeValue.text = "0"
+        feeValue.text = "1€"
         
         getLatest { [weak self] (result) in
         
@@ -139,7 +139,7 @@ class TransferVC: UIViewController {
         
         switch (round(sumSlider.value)) {
             
-        case (1...100):
+        case (0...100):
             commission = 2
             
         case (101...500):
@@ -149,7 +149,7 @@ class TransferVC: UIViewController {
             commission = 4
             
         default:
-            commission = 2
+            commission = 4
         }
         feePercent.text = "\(commission)%"
         feeValue.text = "\(Int(commission*Int(sumSlider.value))/100)€"
@@ -158,9 +158,9 @@ class TransferVC: UIViewController {
     func sumSliderModifier(withCase:Int){
         switch withCase {
         case 0:
-            sumSlider.minimumValue = 1
+            sumSlider.minimumValue = 2
             sumSlider.maximumValue = 100
-            firstLabelSlider.text = "0€"
+            firstLabelSlider.text = "2€"
             secondLabelSlider.text = "50€"
             thirdLabelSlider.text = "100€"
             firstInterval.isEnabled = false
@@ -190,9 +190,9 @@ class TransferVC: UIViewController {
             thirdInterval.isEnabled = false
             
         default:
-            sumSlider.minimumValue = 1
+            sumSlider.minimumValue = 2
             sumSlider.maximumValue = 100
-            firstLabelSlider.text = "0€"
+            firstLabelSlider.text = "2€"
             secondLabelSlider.text = "50€"
             thirdLabelSlider.text = "100€"
             firstInterval.isEnabled = false
@@ -200,7 +200,7 @@ class TransferVC: UIViewController {
             thirdInterval.isEnabled = true
         }
         transferButton.isHidden = false
-        sumText.text! = "\(Int(sumSlider.value))€"
+        sumText.text! = "\(Int(sumSlider.value))"
         calculateFee()
     }
     
@@ -323,21 +323,29 @@ class TransferVC: UIViewController {
         
         
         
-        let sumInt: Int = Int(sumText.text!) ?? 0
+        var sumInt: Int = Int(sumText.text!) ?? 0
+        print(sumInt)
         switch (sumInt) {
-        case 0:
+        case 0...1:
             transferButton.isHidden = true
-        case 1...100:
+            sumSlider.value =   2.0
+            
+        case 2...100:
             sumSliderModifier(withCase: 0)
+            sumSlider.value =   Float(sumInt)
         case 101...500:
             sumSliderModifier(withCase: 1)
+            sumSlider.value =   Float(sumInt)
         case 501...1000:
             sumSliderModifier(withCase: 2)
+            sumSlider.value =   Float(sumInt)
         case _ where sumInt>1000:
             print("WTF")
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
             sumSliderModifier(withCase: 2)
-            sumText.text! = "1000"
+            sumInt = 1000
+            sumSlider.value =   Float(sumInt)
+            sumText.text! = "\(sumInt)"
             ///TODO: bAlerta
             let alert = UIAlertController(title: "Atentie!", message: "Ati introdus o suma prea mare \n Limita este de 1000€", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
@@ -346,11 +354,12 @@ class TransferVC: UIViewController {
             
         default:
             sumSliderModifier(withCase: 0)
+            sumSlider.value =   Float(sumInt)
         }
-        guard let sumTextFloat = Float(sumText.text!) else{return}
-        sumSlider.value =   sumTextFloat   ///Doar asta
-        sumText.text! = "\(sumText.text!)\(moneyTypes[moneySelected])"
-        calculateFee()
+        guard let sumTextInt = Int(sumText.text!) else{return}
+          ///Doar asta
+        sumText.text! = "\(sumInt)\(moneyTypes[moneySelected])"
+        //calculateFee()
         
     }
     
@@ -371,8 +380,6 @@ class TransferVC: UIViewController {
 }
 
 
-
-
 struct rates: Decodable {
     
     var date: String
@@ -386,13 +393,4 @@ enum Result {
     case success(rates)
 }
 
-extension UIView {
-    func fadeTransition(_ duration:CFTimeInterval) {
-        let animation = CATransition()
-        animation.timingFunction = CAMediaTimingFunction(name:
-            CAMediaTimingFunctionName.easeInEaseOut)
-        animation.type = CATransitionType.fade
-        animation.duration = duration
-        layer.add(animation, forKey: CATransitionType.fade.rawValue)
-    }
-}
+

@@ -82,17 +82,19 @@ class SettingsVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource{
     }
     
     @IBAction func logOut(_ sender: Any) {
-       UserDefaults.standard.set(false, forKey: "LogIn")
-        print("Aci 111\n")
-        print(UserDefaults.standard.bool(forKey: "LogIn"))
+//       UserDefaults.standard.set(false, forKey: "LogIn")
+//        print("Aci 111\n")
+//        print(UserDefaults.standard.bool(forKey: "LogIn"))
         do{
             
-            try Auth.auth().signOut()
-            
+            let tried = try? Auth.auth().signOut()
+            if (tried != nil){
             let dataBase = DataBase(defaulty: 1)
+            saveTableFire(tableName: "")
             dataBase.dropTable(tableName: "Transfer")
             dataBase.dropTable(tableName: "LogIn")
                 presentingViewController?.dismiss(animated: true, completion: nil)
+            }
               }catch{
                   print(error)
               }
@@ -101,27 +103,13 @@ class SettingsVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource{
     }
     
     
-    
+    func  saveTableFire(tableName:String){
+        ///TODO: Save Tables
+    }
     
     
     
 }
 
 
-  func getLatest(completion: @escaping (Result) -> Void) {
-       let urlString = "http://data.fixer.io/api/latest?access_key=78393061a42b3ac215ec6f2cada75d3a"
-    guard let url = URL(string: urlString) else { completion(.failure); return  }
-    
-    URLSession.shared.dataTask(with: url) { (data, response, error) in
-         
-         guard error == nil, let urlResponse = response as? HTTPURLResponse, urlResponse.statusCode == 200, let data = data else { completion(.failure); return }
-         
-         do {
-             
-             let exchangeRates = try JSONDecoder().decode(rates.self, from: data)
-             completion(.success(exchangeRates))
-         }
-         catch { completion(.failure) }
-         
-         }.resume()
-}
+

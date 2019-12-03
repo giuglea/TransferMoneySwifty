@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 
+
+
+
 extension UITextField{
     
     @IBInspectable var doneAccessory: Bool{
@@ -42,4 +45,50 @@ extension UITextField{
     {
         self.resignFirstResponder()
     }
+}
+
+
+extension UIView {
+    func fadeTransition(_ duration:CFTimeInterval) {
+        let animation = CATransition()
+        animation.timingFunction = CAMediaTimingFunction(name:
+            CAMediaTimingFunctionName.easeInEaseOut)
+        animation.type = CATransitionType.fade
+        animation.duration = duration
+        layer.add(animation, forKey: CATransitionType.fade.rawValue)
+    }
+}
+
+
+
+  func getLatest(completion: @escaping (Result) -> Void) {
+       let urlString = "http://data.fixer.io/api/latest?access_key=78393061a42b3ac215ec6f2cada75d3a"
+    guard let url = URL(string: urlString) else { completion(.failure); return  }
+    
+    URLSession.shared.dataTask(with: url) { (data, response, error) in
+         
+         guard error == nil, let urlResponse = response as? HTTPURLResponse, urlResponse.statusCode == 200, let data = data else { completion(.failure); return }
+         
+         do {
+             
+             let exchangeRates = try JSONDecoder().decode(rates.self, from: data)
+             completion(.success(exchangeRates))
+         }
+         catch { completion(.failure) }
+         
+         }.resume()
+}
+
+func checkCreateDatabase()->DataBase{
+  var first = UserDefaults.standard.bool(forKey: "first")
+           
+  if(first == false) {
+      var dataBase = DataBase(defaulty: 0) //Transfer (Id, Sender,Data,Value,Receiver)
+      first = true
+      UserDefaults.standard.set(first, forKey: "first")
+  }
+           
+  var dataBase = DataBase(defaulty: 1)
+    
+    return dataBase
 }

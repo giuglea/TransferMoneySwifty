@@ -18,16 +18,18 @@ class LogInVC: UIViewController{
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var logInButton: UIButton!
+    
     var hasLoggedIn = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        emailTextField.text! = UserDefaults.standard.string(forKey: "email")!
+        //passwordTextField.text! = UserDefaults.standard.string(forKey: "password")!
         logInButton.layer.cornerRadius = 25
         let dataBase = DataBase(defaulty: 1)
 
         dataBase.createTable(createTableString: "CREATE TABLE LogIn(Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Logged INT );")
-        hasLoggedIn = dataBase.query1(queryStatementString: "SELECT * FROM LogIn;")
+        hasLoggedIn = dataBase.query1(queryStatementString: "SELECT * FROM LogIn ;")
         
         
         
@@ -38,6 +40,7 @@ class LogInVC: UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         if(hasLoggedIn == 1){
             print(hasLoggedIn)
+            passwordTextField.text! = UserDefaults.standard.string(forKey: "password")!
             let email = UserDefaults.standard.string(forKey: "email")!
             let password = UserDefaults.standard.string(forKey: "password")!
             Auth.auth().signIn(withEmail: email, password: password) { (user, error) in

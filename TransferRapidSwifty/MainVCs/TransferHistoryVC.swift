@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import RealmSwift
+//import RealmSwift
 
 
 
@@ -26,6 +26,8 @@ class TransferHistoryVC: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        getUserHistory()
   
 //        refreshControl.addTarget(self, action: "refresh:", for: UIControl.Event.valueChanged)
 //        self.refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
@@ -94,21 +96,13 @@ class TransferHistoryVC: UIViewController,UITableViewDelegate,UITableViewDataSou
          self.refreshControl.endRefreshing()
      }
     
+    func getUserHistory(){
+        ///fireBase
+    }
+    
     
 }
 
 
-func checkCreateDatabase()->DataBase{
-    var first = UserDefaults.standard.bool(forKey: "first")
-             
-    if(first == false) {
-        var dataBase = DataBase(defaulty: 0) //Transfer (Id, Sender,Data,Value,Receiver)
-        first = true
-        UserDefaults.standard.set(first, forKey: "first")
-    }
-             
-    var dataBase = DataBase(defaulty: 1)
-      
-      return dataBase
-  }
+
 
