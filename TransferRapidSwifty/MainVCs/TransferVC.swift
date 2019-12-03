@@ -151,8 +151,13 @@ class TransferVC: UIViewController {
         default:
             commission = 4
         }
+        var  minimumFee =  Int(commission*Int(sumSlider.value))/100
+        if minimumFee == 0{
+            minimumFee = 1
+        }
+        
         feePercent.text = "\(commission)%"
-        feeValue.text = "\(Int(commission*Int(sumSlider.value))/100)€"
+        feeValue.text = "\(minimumFee)€"
         
     }
     func sumSliderModifier(withCase:Int){
@@ -359,7 +364,7 @@ class TransferVC: UIViewController {
         guard let sumTextInt = Int(sumText.text!) else{return}
           ///Doar asta
         sumText.text! = "\(sumInt)\(moneyTypes[moneySelected])"
-        //calculateFee()
+        calculateFee()
         
     }
     
@@ -380,17 +385,5 @@ class TransferVC: UIViewController {
 }
 
 
-struct rates: Decodable {
-    
-    var date: String
-    var base: String
-    var rates: [String: Double]
-}
-
-enum Result {
-    
-    case failure
-    case success(rates)
-}
 
 
