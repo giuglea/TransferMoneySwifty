@@ -57,6 +57,8 @@ class TransferHistoryVC: UIViewController,UITableViewDelegate,UITableViewDataSou
         cell.dateLabel.text = transferArray[transferArray.count - indexPath.row - 1].date
         cell.sumLabel.text = "\(transferArray[transferArray.count - indexPath.row - 1].value)€"
         cell.receiverLabel.text = transferArray[transferArray.count -  indexPath.row - 1].receiver
+        print(cell.receiverLabel.text)
+        print(cell.dateLabel.text)
        
         
         return cell

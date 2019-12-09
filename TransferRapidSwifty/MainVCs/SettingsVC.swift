@@ -16,16 +16,23 @@ class SettingsVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource{
     var moneySelected : Int = 0
     var moneyTypes = ["€","$","RON"]
     var moneyValue = [1, 1.1, 4.78]
+    var securityLevel  =  0
     
     @IBOutlet weak var moneyValueLabel: UILabel!
+    @IBOutlet weak var securityLevelLabel: UILabel!
     
+    @IBOutlet weak var securityStepper: UIStepper!
     @IBOutlet weak var currentUserLabel: UILabel!
     @IBOutlet weak var logOutButton: UIButton!
+    @IBOutlet weak var addCardButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getSecurityLevel()
+        
         do {try currentUserLabel.text! = (Auth.auth().currentUser?.email)!}catch{print(error)}
         logOutButton.layer.cornerRadius = 25
+        addCardButton.layer.cornerRadius = 25
         moneyValueLabel.text! = "\(moneyValue[moneySelected])\(moneyTypes[moneySelected])"
         
         
@@ -103,8 +110,28 @@ class SettingsVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource{
     }
     
     
+    @IBAction func addCard(_ sender: Any) {
+        performSegue(withIdentifier: "registerCard", sender: self)
+    }
+    
+    
     func  saveTableFire(tableName:String){
         ///TODO: Save Tables
+    }
+    
+    
+    @IBAction func changeSecurityLevel(_ sender: UIStepper) {
+        securityLevel = Int(sender.value)
+        securityLevelLabel.text! = String(securityLevel)
+        UserDefaults.standard.set(securityLevel, forKey: "securityLevel")
+    }
+    
+    
+    func getSecurityLevel(){
+        securityLevel = UserDefaults.standard.integer(forKey: "securityLevel")
+        securityLevelLabel.text! = String(securityLevel)
+        securityStepper.value =  Double(securityLevel)
+        
     }
     
     

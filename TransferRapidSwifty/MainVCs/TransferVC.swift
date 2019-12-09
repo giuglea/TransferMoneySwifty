@@ -59,12 +59,18 @@ class TransferVC: UIViewController {
     @IBOutlet weak var thirdInterval: UIButton!
     
     
+    @IBOutlet weak var changeSumStepper: UIStepper!
+    
+    
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         sumSlider.minimumValue = 2
         sumSlider.maximumValue = 100
+        
+        changeSumStepper.minimumValue = 2
+        changeSumStepper.maximumValue = 100
 
         transferButton.layer.cornerRadius = 25
         //transferButton.isHidden = true
@@ -130,6 +136,9 @@ class TransferVC: UIViewController {
             feeValue.text = "\(Int(commission*Int(sumSlider.value))/100)€"
         }
         
+        
+        changeSumStepper.value = Double(sumSlider.value)
+        
     
         
     }
@@ -168,6 +177,8 @@ class TransferVC: UIViewController {
             firstLabelSlider.text = "2€"
             secondLabelSlider.text = "50€"
             thirdLabelSlider.text = "100€"
+            changeSumStepper.minimumValue = 2
+            changeSumStepper.maximumValue = 100
             firstInterval.isEnabled = false
             secondInterval.isEnabled = true
             thirdInterval.isEnabled = true
@@ -179,6 +190,8 @@ class TransferVC: UIViewController {
             firstLabelSlider.text = "100€"
             secondLabelSlider.text = "300€"
             thirdLabelSlider.text = "500€"
+            changeSumStepper.minimumValue = 100
+            changeSumStepper.maximumValue = 500
             firstInterval.isEnabled = true
             secondInterval.isEnabled = false
             thirdInterval.isEnabled = true
@@ -190,6 +203,8 @@ class TransferVC: UIViewController {
             firstLabelSlider.text = "500€"
             secondLabelSlider.text = "750€"
             thirdLabelSlider.text = "1000€"
+            changeSumStepper.minimumValue = 500
+            changeSumStepper.maximumValue = 1000
             firstInterval.isEnabled = true
             secondInterval.isEnabled = true
             thirdInterval.isEnabled = false
@@ -200,6 +215,8 @@ class TransferVC: UIViewController {
             firstLabelSlider.text = "2€"
             secondLabelSlider.text = "50€"
             thirdLabelSlider.text = "100€"
+            changeSumStepper.minimumValue = 2
+            changeSumStepper.maximumValue = 100
             firstInterval.isEnabled = false
             secondInterval.isEnabled = true
             thirdInterval.isEnabled = true
@@ -211,28 +228,43 @@ class TransferVC: UIViewController {
     
     @IBAction func changeMoneySelected(_ sender: Any) {
         sumSliderModifier(withCase: 0)
+        sumText.text! = "\(Int(sumSlider.value))€"
         sumSlider.updateConstraints()
     }
     
     @IBAction func changeMoneySelected500(_ sender: Any) {
         sumSliderModifier(withCase: 1)
+        sumText.text! = "\(Int(sumSlider.value))€"
         sumSlider.updateConstraints()
     }
     
     @IBAction func changeMoneySelected1000(_ sender: Any) {
         sumSliderModifier(withCase: 2)
+        sumText.text! = "\(Int(sumSlider.value))€"
         sumSlider.updateConstraints()
     }
+    
+    
+    @IBAction func changeSumStepperAction(_ sender: Any) {
+        
+        sumSlider.value = Float(changeSumStepper.value)
+        sumSlider.reloadInputViews()
+        sumText.text =  "\(Int(changeSumStepper.value))€"
+        
+    }
+    
     
     
     
     @IBAction func transfer(_ sender: Any) {
        
         if(destination.text! != "" ){
+            
+            let securityLevel = UserDefaults.standard.integer(forKey: "securityLevel")
         
             var transferObject = TransferObject(sender: "\(accountName)", receiver: destination.text!, date: "", value: (Int(sumSlider.value)))
             var dataBase = checkCreateDatabase()
-            dataBase.createTable(createTableString: "CREATE TABLE Transfer(Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Sender CHAR(255), Data CHAR(255), Value INT, Receiver  CHAR(255) );")
+            dataBase.createTable(createTableString: "CREATE TABLE Transfer(Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Sender CHAR(255), Data CHAR(255), Value INT, Receiver  CHAR(512) );")
             
             let insertStatementString = "INSERT INTO Transfer (Id, Sender, Data, Value, Receiver) VALUES (?, ?, ?, ?, ?);"
             let isSuccesful = dataBase.insert(sender: transferObject.sender, receiver: transferObject.receiver, value: transferObject.value, insertStatementString: insertStatementString)
@@ -321,7 +353,11 @@ class TransferVC: UIViewController {
     @IBAction func editingBegun(_ sender: Any) {
         
         sumText.text! = "\(Int(sumSlider.value))"
+        sumSlider.isEnabled = false
     }
+    
+    
+    
     
     
     @IBAction func editingEnded(_ sender: Any) {
@@ -333,7 +369,12 @@ class TransferVC: UIViewController {
         switch (sumInt) {
         case 0...1:
             transferButton.isHidden = true
-            sumSlider.value =   2.0
+            sumInt = 2
+            sumSliderModifier(withCase: 0)
+            sumSlider.value = Float(sumInt)
+            let alert = UIAlertController(title: "Atentie!", message: "Suma minima este de 2€", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             
         case 2...100:
             sumSliderModifier(withCase: 0)
@@ -364,6 +405,7 @@ class TransferVC: UIViewController {
         guard let sumTextInt = Int(sumText.text!) else{return}
           ///Doar asta
         sumText.text! = "\(sumInt)\(moneyTypes[moneySelected])"
+        sumSlider.isEnabled = true
         calculateFee()
         
     }
