@@ -250,6 +250,7 @@ class TransferVC: UIViewController {
         sumSlider.value = Float(changeSumStepper.value)
         sumSlider.reloadInputViews()
         sumText.text =  "\(Int(changeSumStepper.value))€"
+        calculateFee()
         
     }
     
@@ -354,6 +355,7 @@ class TransferVC: UIViewController {
         
         sumText.text! = "\(Int(sumSlider.value))"
         sumSlider.isEnabled = false
+        changeSumStepper.isEnabled = false
     }
     
     
@@ -379,19 +381,23 @@ class TransferVC: UIViewController {
         case 2...100:
             sumSliderModifier(withCase: 0)
             sumSlider.value =   Float(sumInt)
+            changeSumStepper.value = Double(sumSlider.value)
         case 101...500:
             sumSliderModifier(withCase: 1)
             sumSlider.value =   Float(sumInt)
+            changeSumStepper.value = Double(sumSlider.value)
         case 501...1000:
             sumSliderModifier(withCase: 2)
             sumSlider.value =   Float(sumInt)
+            changeSumStepper.value = Double(sumSlider.value)
         case _ where sumInt>1000:
-            print("WTF")
+           // print("no!")
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
             sumSliderModifier(withCase: 2)
             sumInt = 1000
             sumSlider.value =   Float(sumInt)
             sumText.text! = "\(sumInt)"
+            changeSumStepper.value = Double(sumSlider.value)
             ///TODO: bAlerta
             let alert = UIAlertController(title: "Atentie!", message: "Ati introdus o suma prea mare \n Limita este de 1000€", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
@@ -401,12 +407,14 @@ class TransferVC: UIViewController {
         default:
             sumSliderModifier(withCase: 0)
             sumSlider.value =   Float(sumInt)
+            changeSumStepper.value = Double(sumSlider.value)
         }
         guard let sumTextInt = Int(sumText.text!) else{return}
           ///Doar asta
         sumText.text! = "\(sumInt)\(moneyTypes[moneySelected])"
         sumSlider.isEnabled = true
         calculateFee()
+        changeSumStepper.isEnabled = true
         
     }
     
